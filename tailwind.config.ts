@@ -6,7 +6,22 @@ const config: Config = {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
-  theme: {},
+  theme: {
+    colors: {
+      black: '#000000',
+      darkgray: '#7D7D7D',
+      gray: '#E5E5E5',
+      lightgray: '#F3F3F3',
+      white: '#FFFFFF',
+    },
+    screens: {
+      tablet: '730px',
+      desktop: '1280px',
+    },
+  },
   plugins: [],
+  future: {
+    hoverOnlyWhenSupported: true,
+  },
 }
 export default config

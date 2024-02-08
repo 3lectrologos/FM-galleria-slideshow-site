@@ -1,3 +1,54 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.textStyle-display {
+  @apply font-bold;
+  @apply text-[100px] leading-[100px];
+  @apply tablet:text-[200px] tablet:leading-[150px];
+}
+
+.textStyle-h1 {
+  @apply font-bold;
+  @apply text-[24px] leading-[29px];
+  @apply tablet:text-[56px] tablet:leading-[64px];
+}
+
+.textStyle-h2 {
+  @apply font-bold;
+  @apply text-[24px] leading-[29px];
+}
+
+.textStyle-h3 {
+  @apply font-bold;
+  @apply text-[18px] leading-[22px];
+}
+
+.textStyle-sh1 {
+  @apply text-[15px] leading-[19px];
+}
+
+.textStyle-sh2 {
+  @apply text-[13px] leading-[17px];
+}
+
+.textStyle-link1 {
+  @apply font-bold;
+  @apply text-[9px] leading-[11px] tracking-[2px];
+  @apply tablet:text-[12px] tablet:leading-[15px] tablet:tracking-[2.5px];
+}
+
+.textStyle-link2 {
+  @apply font-bold;
+  @apply text-[9px] leading-[11px] tracking-[2px];
+}
+
+.textStyle-body {
+  @apply font-bold;
+  @apply text-[14px] leading-[28px];
+}
+
+img {
+  height: auto;
+}
