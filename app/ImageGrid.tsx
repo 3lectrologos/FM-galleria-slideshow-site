@@ -5,6 +5,8 @@ import data from '@/app/data/data.json'
 import { useEffect, useMemo, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { PuffLoader } from 'react-spinners'
+import { redirect } from 'next/navigation'
+import Link from 'next/link'
 
 function arrange(
   images: ImageData[],
@@ -80,7 +82,13 @@ function ImageCard({
   path: string
 }) {
   return (
-    <div className={`relative w-fit h-fit group cursor-pointer`}>
+    <Link
+      className={`relative w-fit h-fit group cursor-pointer`}
+      role="button"
+      aria-label={name}
+      tabIndex={0}
+      href={`/piece/${name}`}
+    >
       <img className={`object-contain`} src={path} alt={name} />
       <div
         className={`absolute top-0 w-full h-full bg-white/50 opacity-0 group-hover:opacity-100 transition-opacity`}
@@ -93,7 +101,7 @@ function ImageCard({
           <span className={`textStyle-sh2 text-white/75`}>{artist}</span>
         </div>
       </div>
-    </div>
+    </Link>
   )
 }
 
