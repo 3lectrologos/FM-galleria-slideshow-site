@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { twMerge } from 'tailwind-merge'
 import Footer from '@/app/piece/[piece]/Footer'
+import ImageWithButton from '@/app/piece/[piece]/ImageWithButton'
 
 export default function Home({ params }: { params: { piece: string } }) {
   const name = decodeURI(params.piece)
@@ -43,13 +44,7 @@ function ImageDetails({
 }) {
   return (
     <div className={twMerge(`relative pb-[11px]`, className)}>
-      <Image
-        src={imageData.images.hero.large.slice(1)}
-        alt={imageData.name}
-        width={475}
-        height={560}
-        priority={true}
-      />
+      <ImageWithButton imageData={imageData} />
       <div
         className={`absolute top-0 right-16 translate-x-full pl-16 pb-16 flex flex-col gap-y-6 bg-white`}
       >
@@ -83,8 +78,9 @@ function ImageText({ imageData }: { imageData: ImageData }) {
       </span>
       <div className={`h-0 grow`} />
       <Link
-        className={`textStyle-link2 text-darkgray uppercase underline`}
+        className={`textStyle-link2 text-darkgray uppercase underline hover:text-black transition-colors`}
         href={imageData.source}
+        target="_blank"
       >
         go to source
       </Link>

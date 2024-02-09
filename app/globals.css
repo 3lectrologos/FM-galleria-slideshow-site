@@ -44,6 +44,16 @@
   @apply text-[9px] leading-[11px] tracking-[2px];
 }
 
+.textStyle-button {
+  @apply font-normal;
+  @apply text-[10px] leading-[10px] tracking-[2px];
+}
+
+.textStyle-theater {
+  @apply font-bold;
+  @apply text-[14px] leading-[17px] tracking-[3px];
+}
+
 .textStyle-body {
   @apply font-bold;
   @apply text-[14px] leading-[28px];
