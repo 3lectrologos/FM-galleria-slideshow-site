@@ -33,7 +33,7 @@ export default function Footer({
   return (
     <div className={`w-full`}>
       <FooterProgressBar index={index} total={total} />
-      <div className={`flex flex-col px-10 py-6`}>
+      <div className={`flex flex-col px-6 py-[17px] tablet:px-10 tablet:py-6`}>
         <div className={`flex flex-row justify-between items-center`}>
           <FooterText imageData={imageData} />
           <FooterButtons previousUrl={prevUrl} nextUrl={nextUrl} />
@@ -76,7 +76,7 @@ function FooterButtons({
   previousUrl: string
 }) {
   return (
-    <div className={`flex flex-row justify-between gap-x-6 tablet:gap-x-10`}>
+    <div className={`flex flex-row justify-between gap-x-2 tablet:gap-x-5`}>
       <FooterButton
         label="previous"
         url={previousUrl}
@@ -104,20 +104,22 @@ function FooterButton({
     <Link
       href={url}
       className={twMerge(
-        `w-[17.33px] h-4 tablet:w-[26px] tablet:h-6`,
+        `p-2 group`,
         url || `pointer-events-none cursor-default`
       )}
       role="button"
       aria-label={label}
       tabIndex={0}
     >
-      {icon({
-        className: twMerge(
-          `stroke-black`,
-          url ? 'opacity-100' : 'opacity-15',
-          url && `transition-opacity hover:opacity-50`
-        ),
-      })}
+      <div className={`w-[17.33px] h-4 tablet:w-[26px] tablet:h-6`}>
+        {icon({
+          className: twMerge(
+            `stroke-black`,
+            url ? 'opacity-100' : 'opacity-15',
+            url && `transition-opacity group-hover:opacity-50`
+          ),
+        })}
+      </div>
     </Link>
   )
 }

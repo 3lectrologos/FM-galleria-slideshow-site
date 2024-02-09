@@ -22,7 +22,8 @@
 
 .textStyle-h3 {
   @apply font-bold;
-  @apply text-[18px] leading-[22px];
+  @apply text-[14px] leading-[17px];
+  @apply tablet:text-[18px] tablet:leading-[22px];
 }
 
 .textStyle-sh1 {
@@ -30,7 +31,8 @@
 }
 
 .textStyle-sh2 {
-  @apply text-[13px] leading-[17px];
+  @apply text-[10px] leading-[12px];
+  @apply tablet:text-[13px] tablet:leading-[17px];
 }
 
 .textStyle-link1 {

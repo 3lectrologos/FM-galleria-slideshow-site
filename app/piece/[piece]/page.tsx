@@ -20,10 +20,15 @@ export default function Home({ params }: { params: { piece: string } }) {
       className={`w-full flex-grow flex flex-col justify-between items-center`}
     >
       <div
-        className={`max-w-[1500px] flex flex-row justify-between mt-[100px] px-10`}
+        className={twMerge(
+          `w-full flex flex-col justify-between px-6 tablet:px-10`,
+          `desktop:max-w-[1500px] desktop:mt-[100px] desktop:flex-row`
+        )}
       >
         <ImageDetails className={`shrink-0`} imageData={imageData} />
-        <div className={`min-w-0 w-[500px]`} />
+        <div
+          className={twMerge(`h-[100px]`, `desktop:min-w-0 desktop:w-[500px]`)}
+        />
         <ImageText imageData={imageData} />
       </div>
       <Footer
@@ -43,25 +48,41 @@ function ImageDetails({
   className?: string
 }) {
   return (
-    <div className={twMerge(`relative pb-[11px]`, className)}>
+    <div className={twMerge(`relative`, className)}>
       <ImageWithButton imageData={imageData} />
       <div
-        className={`absolute top-0 right-16 translate-x-full pl-16 pb-16 flex flex-col gap-y-6 bg-white`}
+        className={twMerge(
+          `absolute flex flex-col justify-between -translate-y-[54px]`,
+          `desktop:h-full desktop:top-0 desktop:right-16 desktop:translate-x-full desktop:translate-y-0`
+        )}
       >
-        <span className={`textStyle-h1 w-[380px]`}>{imageData.name}</span>
-        <span className={`textStyle-sh1 text-darkgray`}>
-          {imageData.artist.name}
-        </span>
-      </div>
-      <div
-        className={`absolute bottom-[11px] -right-[30px] translate-x-full translate-y-1/2`}
-      >
-        <Image
-          src={imageData.artist.image.slice(1)}
-          alt={imageData.artist.name}
-          width={128}
-          height={128}
-        />
+        <div
+          className={twMerge(
+            `flex flex-col w-[280px] gap-y-2 bg-white p-6`,
+            `desktop:w-auto desktop:gap-y-6 desktop:pl-16 desktop:pb-16 desktop:translate-y-0`
+          )}
+        >
+          <span className={`textStyle-h1 w-full desktop:w-[320px]`}>
+            {imageData.name}
+          </span>
+          <span className={`textStyle-sh1 text-darkgray`}>
+            {imageData.artist.name}
+          </span>
+        </div>
+        <div
+          className={twMerge(
+            `relative w-16 h-16 translate-x-4`,
+            `desktop:w-32 desktop:h-32 desktop:translate-y-1/2`
+          )}
+        >
+          <Image
+            className={`desktop:translate-x-1/2 desktop:ml-[30px]`}
+            src={imageData.artist.image.slice(1)}
+            alt={imageData.artist.name}
+            fill={true}
+            sizes="(max-width: 729px) 64px, 128px"
+          />
+        </div>
       </div>
     </div>
   )
@@ -69,14 +90,21 @@ function ImageDetails({
 
 function ImageText({ imageData }: { imageData: ImageData }) {
   return (
-    <div className={`flex flex-col`}>
-      <span className={`textStyle-display text-lightgray`}>
+    <div
+      className={`relative flex flex-col pb-20 desktop:pb-0 desktop:pr-[50px]`}
+    >
+      <span className={`absolute right-0 textStyle-display text-lightgray`}>
         {imageData.year}
       </span>
-      <span className={`w-[350px] textStyle-body text-darkgray -mt-9`}>
+      <span
+        className={twMerge(
+          `w-full textStyle-body text-darkgray z-10 mt-[75px]`,
+          `desktop:w-[350px] desktop:mt-[115px]`
+        )}
+      >
         {imageData.description}
       </span>
-      <div className={`h-0 grow`} />
+      <div className={`h-10 desktop:h-0 desktop:grow`} />
       <Link
         className={`textStyle-link2 text-darkgray uppercase underline hover:text-black transition-colors`}
         href={imageData.source}

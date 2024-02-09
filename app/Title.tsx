@@ -4,7 +4,9 @@ import Link from 'next/link'
 export default function Title({ className = '' }: { className?: string }) {
   return (
     <div className={twMerge(`w-full flex flex-col`, className)}>
-      <div className={`flex flex-row justify-between items-center`}>
+      <div
+        className={`flex flex-row justify-between items-center px-6 tablet:px-10 desktop:px-0`}
+      >
         <Link
           className={`h-8 desktop:h-12 flex flex-col flex-grow items-start cursor-pointer`}
           href="/"
@@ -29,5 +31,9 @@ export default function Title({ className = '' }: { className?: string }) {
 }
 
 function Divider() {
-  return <div className={`w-full h-px bg-gray my-10`} />
+  return (
+    <div
+      className={`w-full h-px bg-gray my-6 tablet:mt-7 tablet:mb-10 desktop:my-10`}
+    />
+  )
 }

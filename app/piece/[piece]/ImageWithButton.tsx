@@ -5,6 +5,7 @@ import { ImageData } from '@/app/types'
 import { twMerge } from 'tailwind-merge'
 import { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
+import { useMediaQuery } from 'react-responsive'
 
 export default function ImageWithButton({
   imageData,
@@ -12,19 +13,34 @@ export default function ImageWithButton({
   imageData: ImageData
 }) {
   const [theaterMode, setTheaterMode] = useState(false)
+  const isMobile = useMediaQuery({ query: '(max-width: 729px)' })
 
   return (
     <div className={`relative`}>
-      <Image
-        src={imageData.images.hero.large.slice(1)}
-        alt={imageData.name}
-        width={475}
-        height={560}
-        priority={true}
-      />
+      {!isMobile && (
+        <Image
+          src={imageData.images.hero.large.slice(1)}
+          alt={imageData.name}
+          width={475}
+          height={560}
+          priority={true}
+        />
+      )}
+      {isMobile && (
+        <div className={`relative w-full h-[280px]`}>
+          <Image
+            className={`object-cover`}
+            src={imageData.images.hero.small.slice(1)}
+            alt={imageData.name}
+            fill={true}
+            priority={true}
+          />
+        </div>
+      )}
       <div
         className={twMerge(
-          `absolute bottom-4 left-4 flex flex-row gap-x-[14px] w-[152px] h-10 bg-black/75 text-white justify-center items-center`,
+          `absolute top-4 left-4 flex flex-row gap-x-[14px] w-[152px] h-10 bg-black/75 text-white justify-center items-center`,
+          `tablet:top-auto tablet:bottom-4`,
           `hover:bg-white/25 transition-colors cursor-pointer`
         )}
         role="button"

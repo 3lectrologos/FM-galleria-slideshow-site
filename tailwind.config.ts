@@ -16,7 +16,7 @@ const config: Config = {
     },
     screens: {
       tablet: '730px',
-      desktop: '1280px',
+      desktop: '1380px',
     },
   },
   plugins: [],
