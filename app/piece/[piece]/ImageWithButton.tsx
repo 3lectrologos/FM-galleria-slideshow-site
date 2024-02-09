@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import { ImageData } from '@/app/types'
 import { twMerge } from 'tailwind-merge'
-import { useEffect, useLayoutEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 
 export default function ImageWithButton({
@@ -56,10 +56,11 @@ function TheaterImage({
   imageData: ImageData
   onClose: () => void
 }) {
-  const [imageSize, setImageSize] = useState({ width: 0, height: 0 })
+  const imgWidth = imageData.sizes.gallery.width
+  const imgHeight = imageData.sizes.gallery.height
   const defaultTopOffset = -40
   const [buttonOffset, setButtonOffset] = useState({
-    top: defaultTopOffset,
+    top: 0,
     right: 0,
   })
 
@@ -71,25 +72,32 @@ function TheaterImage({
       if (img) {
         const { width: widthString, height: heightString } =
           window.getComputedStyle(img)
-        const width = parseInt(widthString)
-        const height = parseInt(heightString)
-        const imgAspectRatio = imageSize.width / imageSize.height
-        const divAspectRatio = width / height
-        if (!imgAspectRatio || !divAspectRatio) return
-        if (divAspectRatio > imgAspectRatio) {
-          const actualImageWidth = height * imgAspectRatio
-          const extraWidth = width - actualImageWidth
-          setButtonOffset((offset) => ({
-            top: defaultTopOffset,
+        const divWidth = parseInt(widthString)
+        const divHeight = parseInt(heightString)
+
+        if (divWidth > imgWidth && divHeight > imgHeight) {
+          const extraWidth = divWidth - imgWidth
+          const extraHeight = divHeight - imgHeight
+          setButtonOffset({
+            top: extraHeight / 2,
             right: extraWidth / 2,
-          }))
-        } else if (divAspectRatio < imgAspectRatio) {
-          const actualImageHeight = width / imgAspectRatio
-          const extraHeight = height - actualImageHeight
-          setButtonOffset((offset) => ({
-            top: defaultTopOffset + extraHeight / 2,
-            right: 0,
-          }))
+          })
+        } else {
+          const imgAspectRatio = imgWidth / imgHeight
+          const divAspectRatio = divWidth / divHeight
+          if (!imgAspectRatio || !divAspectRatio) return
+          if (divAspectRatio > imgAspectRatio) {
+            const actualImageWidth = divHeight * imgAspectRatio
+            const extraWidth = divWidth - actualImageWidth
+            setButtonOffset({ top: 0, right: extraWidth / 2 })
+          } else if (divAspectRatio < imgAspectRatio) {
+            const actualImageHeight = divWidth / imgAspectRatio
+            const extraHeight = divHeight - actualImageHeight
+            setButtonOffset({
+              top: extraHeight / 2,
+              right: 0,
+            })
+          }
         }
       }
     }
@@ -97,16 +105,19 @@ function TheaterImage({
     computeButtonOffset()
     window.addEventListener('resize', computeButtonOffset)
     return () => window.removeEventListener('resize', computeButtonOffset)
-  }, [imageSize])
+  }, [imgWidth, imgHeight])
 
   return (
     <div
-      className={`absolute top-0 left-0 w-dvw h-dvh z-20 flex flex-col justify-center items-center bg-black/85`}
+      className={`absolute top-0 left-0 w-dvw h-dvh z-20 flex flex-col justify-center items-center p-6 tablet:p-12 bg-black/85`}
     >
-      <div className={`relative w-[75%] h-[75%] flex flex-col`}>
+      <div className={`relative w-full h-full flex flex-col`}>
         <button
           className={`absolute z-50 textStyle-theater uppercase text-white text-right hover:opacity-25 transition-opacity`}
-          style={{ right: buttonOffset.right, top: buttonOffset.top }}
+          style={{
+            right: buttonOffset.right,
+            top: defaultTopOffset + buttonOffset.top,
+          }}
           onClick={onClose}
         >
           close
@@ -116,17 +127,10 @@ function TheaterImage({
         >
           <Image
             id="theater-image"
-            className={`object-contain max-w-[100%] max-h-[100%]`}
+            className={`object-scale-down`}
             src={imageData.images.gallery.slice(1)}
             alt={imageData.name}
             fill={true}
-            onLoad={(event) => {
-              const img = event.target as HTMLImageElement
-              setImageSize({
-                width: img.naturalWidth,
-                height: img.naturalHeight,
-              })
-            }}
           />
         </div>
       </div>

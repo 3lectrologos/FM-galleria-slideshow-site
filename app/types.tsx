@@ -15,4 +15,14 @@ export type ImageData = {
     }
     gallery: string
   }
+  sizes: {
+    thumbnail: {
+      width: number
+      height: number
+    }
+    gallery: {
+      width: number
+      height: number
+    }
+  }
 }
