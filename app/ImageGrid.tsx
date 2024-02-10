@@ -2,45 +2,55 @@
 
 import { ImageData } from '@/app/types'
 import data from '@/app/data/data.json'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { PuffLoader } from 'react-spinners'
 import Link from 'next/link'
+import { shuffleArray } from '@/app/util'
 
-function arrange(
-  images: ImageData[],
-  totalWidth: number,
-  numColumns: number,
-  gap: number
-): ImageData[][] {
-  const imageWidth = (totalWidth - gap * (numColumns + 1)) / numColumns
+function masonry(images: ImageData[], numColumns: number): ImageData[][] {
+  if (numColumns === 0) {
+    return []
+  }
+
   const columns: ImageData[][] = Array.from({ length: numColumns }, () => [])
-  console.log(totalWidth, imageWidth)
-
-  images.forEach((image, index) => {
-    const column = index % numColumns
-    columns[column].push(image)
+  const heights: number[] = Array.from({ length: numColumns }, () => 0)
+  const sortedImages = images.sort((a, b) => {
+    return b.sizes.thumbnail.height - a.sizes.thumbnail.height
   })
 
-  console.log(columns)
+  sortedImages.forEach((image, index) => {
+    const thisHeight = image.sizes.thumbnail.height
+    const minHeightColumn = heights.indexOf(Math.min(...heights))
+    columns[minHeightColumn].push(image)
+    heights[minHeightColumn] += thisHeight
+  })
+
+  const seed = '42'
+  for (let column of columns) {
+    shuffleArray(column, seed)
+  }
+  shuffleArray(columns, seed)
+
   return columns
 }
 
 export default function ImageGrid({ className = '' }: { className?: string }) {
-  const [columns, setColumns] = useState<ImageData[][]>([])
+  const [numColumns, setNumColumns] = useState(0)
+  const columns = useMemo(() => masonry(data, numColumns), [numColumns])
 
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 580) {
-        setColumns(arrange(data, window.innerWidth, 1, 40))
+        setNumColumns(1)
       } else if (window.innerWidth < 950) {
-        setColumns(arrange(data, window.innerWidth, 2, 40))
+        setNumColumns(2)
       } else if (window.innerWidth < 1300) {
-        setColumns(arrange(data, window.innerWidth, 3, 40))
+        setNumColumns(3)
       } else if (window.innerWidth < 1700) {
-        setColumns(arrange(data, window.innerWidth, 4, 40))
+        setNumColumns(4)
       } else {
-        setColumns(arrange(data, window.innerWidth, 5, 40))
+        setNumColumns(5)
       }
     }
 
@@ -49,7 +59,7 @@ export default function ImageGrid({ className = '' }: { className?: string }) {
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
-  if (columns.length === 0) {
+  if (numColumns === 0) {
     return <Loading />
   }
 
