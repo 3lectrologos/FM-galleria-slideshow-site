@@ -2,10 +2,9 @@
 
 import { ImageData } from '@/app/types'
 import data from '@/app/data/data.json'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { PuffLoader } from 'react-spinners'
-import { redirect } from 'next/navigation'
 import Link from 'next/link'
 
 function arrange(
@@ -32,7 +31,7 @@ export default function ImageGrid({ className = '' }: { className?: string }) {
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth < 720) {
+      if (window.innerWidth < 580) {
         setColumns(arrange(data, window.innerWidth, 1, 40))
       } else if (window.innerWidth < 950) {
         setColumns(arrange(data, window.innerWidth, 2, 40))

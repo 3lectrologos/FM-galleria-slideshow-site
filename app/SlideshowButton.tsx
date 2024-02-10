@@ -4,6 +4,7 @@ import data from '@/app/data/data.json'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
+import { twMerge } from 'tailwind-merge'
 
 export default function SlideshowButton({
   className = '',
@@ -24,12 +25,15 @@ export default function SlideshowButton({
       setButtonText('start slideshow')
       setButtonUrl(firstPieceUrl)
     }
-  }, [pathname])
+  }, [pathname, firstPieceUrl])
 
   return (
     <Link
       href={buttonUrl}
-      className={`textStyle-link1 uppercase text-darkgray hover:text-black transition-colors cursor-pointer`}
+      className={twMerge(
+        `textStyle-link1 uppercase text-darkgray hover:text-black transition-colors cursor-pointer`,
+        className
+      )}
     >
       {buttonText}
     </Link>

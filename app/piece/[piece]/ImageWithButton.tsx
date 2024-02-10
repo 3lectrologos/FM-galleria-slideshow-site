@@ -13,30 +13,29 @@ export default function ImageWithButton({
   imageData: ImageData
 }) {
   const [theaterMode, setTheaterMode] = useState(false)
-  const isMobile = useMediaQuery({ query: '(max-width: 749px)' })
+  const isMobile = false // = useMediaQuery({ query: '(max-width: 749px)' })
 
   return (
     <div className={`relative`}>
-      {!isMobile && (
+      <div>
         <Image
+          className={twMerge(`hidden tablet:block`)}
           src={imageData.images.hero.large.slice(1)}
           alt={imageData.name}
           width={475}
           height={560}
           priority={true}
         />
-      )}
-      {isMobile && (
-        <div className={`relative w-full h-[280px]`}>
-          <Image
-            className={`object-cover`}
-            src={imageData.images.hero.small.slice(1)}
-            alt={imageData.name}
-            fill={true}
-            priority={true}
-          />
-        </div>
-      )}
+      </div>
+      <div className={`relative w-full h-[280px] tablet:hidden`}>
+        <Image
+          className={`object-cover`}
+          src={imageData.images.hero.small.slice(1)}
+          alt={imageData.name}
+          fill={true}
+          priority={true}
+        />
+      </div>
       <div
         className={twMerge(
           `absolute top-4 left-4 flex flex-row gap-x-[14px] w-[152px] h-10 bg-black/75 text-white justify-center items-center`,
@@ -74,7 +73,7 @@ function TheaterImage({
 }) {
   const imgWidth = imageData.sizes.gallery.width
   const imgHeight = imageData.sizes.gallery.height
-  const defaultTopOffset = -40
+  const defaultTopOffset = -48
   const [buttonOffset, setButtonOffset] = useState({
     top: 0,
     right: 0,
@@ -129,7 +128,7 @@ function TheaterImage({
     >
       <div className={`relative w-full h-full flex flex-col`}>
         <button
-          className={`absolute z-50 textStyle-theater uppercase text-white text-right hover:opacity-25 transition-opacity`}
+          className={`absolute z-50 textStyle-theater uppercase text-white text-right hover:opacity-25 transition-opacity py-2`}
           style={{
             right: buttonOffset.right,
             top: defaultTopOffset + buttonOffset.top,
