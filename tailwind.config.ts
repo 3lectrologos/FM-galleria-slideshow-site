@@ -15,7 +15,7 @@ const config: Config = {
       white: '#FFFFFF',
     },
     screens: {
-      tablet: '730px',
+      tablet: '750px',
       desktop: '1380px',
     },
   },

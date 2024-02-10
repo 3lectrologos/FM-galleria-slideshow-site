@@ -13,7 +13,7 @@ export default function ImageWithButton({
   imageData: ImageData
 }) {
   const [theaterMode, setTheaterMode] = useState(false)
-  const isMobile = useMediaQuery({ query: '(max-width: 729px)' })
+  const isMobile = useMediaQuery({ query: '(max-width: 749px)' })
 
   return (
     <div className={`relative`}>

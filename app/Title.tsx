@@ -1,5 +1,6 @@
 import { twMerge } from 'tailwind-merge'
 import Link from 'next/link'
+import SlideshowButton from '@/app/SlideshowButton'
 
 export default function Title({ className = '' }: { className?: string }) {
   return (
@@ -19,11 +20,7 @@ export default function Title({ className = '' }: { className?: string }) {
             />
           </svg>
         </Link>
-        <button
-          className={`textStyle-link1 uppercase text-darkgray hover:text-black transition-colors cursor-pointer`}
-        >
-          start slideshow
-        </button>
+        <SlideshowButton />
       </div>
       <Divider />
     </div>

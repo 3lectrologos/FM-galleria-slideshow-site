@@ -5,7 +5,6 @@ import { usePathname } from 'next/navigation'
 import { ImageData } from '@/app/types'
 import Link from 'next/link'
 import { twMerge } from 'tailwind-merge'
-import { className } from 'postcss-selector-parser'
 
 function getUrls(pathname: string) {
   const nameUri = pathname.split('/').pop()
