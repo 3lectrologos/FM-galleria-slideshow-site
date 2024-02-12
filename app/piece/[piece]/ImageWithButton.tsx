@@ -122,7 +122,8 @@ function TheaterImage({
 
   return (
     <div
-      className={`absolute top-0 left-0 w-dvw h-dvh z-20 flex flex-col justify-center items-center p-6 tablet:p-12 bg-black/85`}
+      id="theater-image-container"
+      className={`fixed top-0 left-0 w-full h-full z-20 flex flex-col justify-center items-center p-6 tablet:p-12 bg-black/85`}
     >
       <div className={`relative w-full h-full flex flex-col`}>
         <button

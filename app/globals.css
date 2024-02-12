@@ -64,3 +64,7 @@
 img {
   height: auto;
 }
+
+body:has(#theater-image-container) {
+  overflow: hidden;
+}
