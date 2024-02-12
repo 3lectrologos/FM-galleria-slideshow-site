@@ -1,17 +1,17 @@
 'use client'
 
-import data from '@/app/data/data.json'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
+import { getOrderedImages } from '@/app/util'
 
 export default function SlideshowButton({
   className = '',
 }: {
   className?: string
 }) {
-  const firstPieceUrl = `/piece/${data[0].name}`
+  const firstPieceUrl = `/piece/${getOrderedImages()[0].name}`
   const pathname = usePathname()
   const [buttonText, setButtonText] = useState('start slideshow')
   const [buttonUrl, setButtonUrl] = useState(firstPieceUrl)

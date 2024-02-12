@@ -1,56 +1,24 @@
 'use client'
 
-import { ImageData } from '@/app/types'
-import data from '@/app/data/data.json'
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { AllowedColumns } from '@/app/types'
+import { useEffect, useMemo, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { PuffLoader } from 'react-spinners'
 import Link from 'next/link'
-import { shuffleArray } from '@/app/util'
-
-function masonry(images: ImageData[], numColumns: number): ImageData[][] {
-  if (numColumns === 0) {
-    return []
-  }
-
-  const columns: ImageData[][] = Array.from({ length: numColumns }, () => [])
-  const heights: number[] = Array.from({ length: numColumns }, () => 0)
-  const sortedImages = images.sort((a, b) => {
-    return b.sizes.thumbnail.height - a.sizes.thumbnail.height
-  })
-
-  sortedImages.forEach((image, index) => {
-    const thisHeight = image.sizes.thumbnail.height
-    const minHeightColumn = heights.indexOf(Math.min(...heights))
-    columns[minHeightColumn].push(image)
-    heights[minHeightColumn] += thisHeight
-  })
-
-  const seed = '42'
-  for (let column of columns) {
-    shuffleArray(column, seed)
-  }
-  shuffleArray(columns, seed)
-
-  return columns
-}
+import { masonry } from '@/app/util'
 
 export default function ImageGrid({ className = '' }: { className?: string }) {
-  const [numColumns, setNumColumns] = useState(0)
-  const columns = useMemo(() => masonry(data, numColumns), [numColumns])
+  const [numColumns, setNumColumns] = useState<AllowedColumns>(0)
+  const columns = useMemo(() => masonry(numColumns), [numColumns])
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth < 580) {
+      if (window.innerWidth < 750) {
         setNumColumns(1)
-      } else if (window.innerWidth < 950) {
+      } else if (window.innerWidth < 1380) {
         setNumColumns(2)
-      } else if (window.innerWidth < 1300) {
-        setNumColumns(3)
-      } else if (window.innerWidth < 1700) {
-        setNumColumns(4)
       } else {
-        setNumColumns(5)
+        setNumColumns(4)
       }
     }
 

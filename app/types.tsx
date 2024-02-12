@@ -26,3 +26,5 @@ export type ImageData = {
     }
   }
 }
+
+export type AllowedColumns = 0 | 1 | 2 | 4

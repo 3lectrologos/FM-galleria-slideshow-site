@@ -1,4 +1,3 @@
-import data from '@/app/data/data.json'
 import { notFound } from 'next/navigation'
 import { ImageData } from '@/app/types'
 import Image from 'next/image'
@@ -6,9 +5,11 @@ import Link from 'next/link'
 import { twMerge } from 'tailwind-merge'
 import Footer from '@/app/piece/[piece]/Footer'
 import ImageWithButton from '@/app/piece/[piece]/ImageWithButton'
+import { getOrderedImages } from '@/app/util'
 
 export default function Home({ params }: { params: { piece: string } }) {
   const name = decodeURI(params.piece)
+  const data = getOrderedImages()
   const imageIndex = data.findIndex((image) => image.name === name)
   if (imageIndex === -1) {
     return notFound()
@@ -40,6 +41,8 @@ export default function Home({ params }: { params: { piece: string } }) {
         imageData={imageData}
         index={imageIndex + 1}
         total={data.length}
+        nextName={data[imageIndex + 1]?.name}
+        prevName={data[imageIndex - 1]?.name}
       />
     </div>
   )

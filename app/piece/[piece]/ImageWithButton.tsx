@@ -5,7 +5,6 @@ import { ImageData } from '@/app/types'
 import { twMerge } from 'tailwind-merge'
 import { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { useMediaQuery } from 'react-responsive'
 
 export default function ImageWithButton({
   imageData,
@@ -13,7 +12,6 @@ export default function ImageWithButton({
   imageData: ImageData
 }) {
   const [theaterMode, setTheaterMode] = useState(false)
-  const isMobile = false // = useMediaQuery({ query: '(max-width: 749px)' })
 
   return (
     <div className={`relative`}>
@@ -146,6 +144,7 @@ function TheaterImage({
             src={imageData.images.gallery.slice(1)}
             alt={imageData.name}
             fill={true}
+            priority={true}
           />
         </div>
       </div>

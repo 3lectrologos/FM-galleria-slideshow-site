@@ -1,33 +1,25 @@
 'use client'
 
-import data from '@/app/data/data.json'
-import { usePathname } from 'next/navigation'
 import { ImageData } from '@/app/types'
 import Link from 'next/link'
 import { twMerge } from 'tailwind-merge'
-
-function getUrls(pathname: string) {
-  const nameUri = pathname.split('/').pop()
-  if (!nameUri) return { prevUrl: '', nextUrl: '' }
-  const name = decodeURI(nameUri)
-  const index = data.findIndex((image) => image.name === name)
-  const prevUrl = index === 0 ? '' : `/piece/${data[index - 1].name}`
-  const nextUrl =
-    index === data.length - 1 ? '' : `/piece/${data[index + 1].name}`
-  return { prevUrl, nextUrl }
-}
+import { ReactNode } from 'react'
 
 export default function Footer({
   index,
   total,
   imageData,
+  nextName,
+  prevName,
 }: {
   index: number
   total: number
   imageData: ImageData
+  nextName: string
+  prevName: string
 }) {
-  const pathname = usePathname()
-  const { nextUrl, prevUrl } = getUrls(pathname)
+  const nextUrl = nextName ? `/piece/${nextName}` : ''
+  const prevUrl = prevName ? `/piece/${prevName}` : ''
 
   return (
     <div className={`w-full`}>
@@ -95,7 +87,7 @@ function FooterButton({
   label,
   url,
 }: {
-  icon: (_p: any) => React.ReactNode
+  icon: (_p: any) => ReactNode
   label: string
   url: string
 }) {
