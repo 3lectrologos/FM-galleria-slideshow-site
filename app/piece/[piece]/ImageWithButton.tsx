@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import { ImageData } from '@/app/types'
 import { twMerge } from 'tailwind-merge'
-import { useEffect, useState } from 'react'
+import { useEffect, useLayoutEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 
 export default function ImageWithButton({
@@ -120,10 +120,17 @@ function TheaterImage({
     return () => window.removeEventListener('resize', computeButtonOffset)
   }, [imgWidth, imgHeight])
 
+  useLayoutEffect(() => {
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = 'auto'
+    }
+  }, [])
+
   return (
     <div
       id="theater-image-container"
-      className={`fixed top-0 left-0 w-full h-full z-20 flex flex-col justify-center items-center p-6 pt-12 tablet:p-12 bg-black/85`}
+      className={`fixed top-0 left-0 w-full h-full z-20 flex flex-col justify-center items-center p-6 pt-14 tablet:p-12 tablet:pt-16 bg-black/85`}
     >
       <div className={`relative w-full h-full flex flex-col`}>
         <button

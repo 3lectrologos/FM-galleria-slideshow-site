@@ -17,9 +17,7 @@ export default function Home({ params }: { params: { piece: string } }) {
   const imageData: ImageData = data[imageIndex]
 
   return (
-    <div
-      className={`w-full flex-grow flex flex-col justify-between items-center`}
-    >
+    <div className={`w-full flex-grow flex flex-col items-center`}>
       <div
         className={twMerge(
           `w-full flex flex-col justify-between px-6 tablet:px-10`,
@@ -37,6 +35,7 @@ export default function Home({ params }: { params: { piece: string } }) {
         />
         <ImageText imageData={imageData} />
       </div>
+      <div className={`flex-grow desktop:h-20`} />
       <Footer
         imageData={imageData}
         index={imageIndex + 1}
