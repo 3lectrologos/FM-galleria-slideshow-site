@@ -53,7 +53,8 @@
 
 .textStyle-theater {
   @apply font-bold;
-  @apply text-[14px] leading-[17px] tracking-[3px];
+  @apply text-[12px] leading-[14px] tracking-[2px];
+  @apply tablet:text-[14px] tablet:leading-[17px] tablet:tracking-[3px];
 }
 
 .textStyle-body {
