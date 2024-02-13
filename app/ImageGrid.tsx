@@ -6,6 +6,7 @@ import { twMerge } from 'tailwind-merge'
 import { PuffLoader } from 'react-spinners'
 import Link from 'next/link'
 import { masonry } from '@/app/util'
+import { motion } from 'framer-motion'
 
 export default function ImageGrid({ className = '' }: { className?: string }) {
   const [numColumns, setNumColumns] = useState<AllowedColumns>(0)
@@ -59,26 +60,31 @@ function ImageCard({
   path: string
 }) {
   return (
-    <Link
-      className={`relative w-fit h-fit group cursor-pointer`}
-      role="button"
-      aria-label={name}
-      tabIndex={0}
-      href={`/piece/${name}`}
+    <motion.div
+      initial={{ height: 0, opacity: 0 }}
+      animate={{ height: 'auto', opacity: 1 }}
     >
-      <img className={`object-contain`} src={path} alt={name} />
-      <div
-        className={`absolute top-0 w-full h-full bg-white/50 opacity-0 group-hover:opacity-100 transition-opacity`}
-      />
-      <div
-        className={`absolute flex flex-col justify-end bottom-0 w-full h-[170px] bg-gradient-to-b from-black/0 to-black/[84%]`}
+      <Link
+        className={`relative w-fit h-fit group cursor-pointer`}
+        role="button"
+        aria-label={name}
+        tabIndex={0}
+        href={`/piece/${name}`}
       >
-        <div className={`flex flex-col gap-y-2 ml-8 mr-12 mb-8`}>
-          <span className={`textStyle-h2 text-white`}>{name}</span>
-          <span className={`textStyle-sh2 text-white/75`}>{artist}</span>
+        <img className={`object-contain`} src={path} alt={name} />
+        <div
+          className={`absolute top-0 w-full h-full bg-white/50 opacity-0 group-hover:opacity-100 transition-opacity`}
+        />
+        <div
+          className={`absolute flex flex-col justify-end bottom-0 w-full h-[170px] bg-gradient-to-b from-black/0 to-black/[84%]`}
+        >
+          <div className={`flex flex-col gap-y-2 ml-8 mr-12 mb-8`}>
+            <span className={`textStyle-h2 text-white`}>{name}</span>
+            <span className={`textStyle-sh2 text-white/75`}>{artist}</span>
+          </div>
         </div>
-      </div>
-    </Link>
+      </Link>
+    </motion.div>
   )
 }
 
