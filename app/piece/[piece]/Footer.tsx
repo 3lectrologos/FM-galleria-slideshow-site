@@ -53,7 +53,7 @@ function FooterProgressBar({ index, total }: { index: number; total: number }) {
     <div className={`relative flex flex-row w-full`}>
       <div className={`w-full h-px bg-gray`} />
       <motion.div
-        layout
+        layout="size"
         layoutId="progress-bar"
         className={`absolute top-0 h-px bg-black`}
         style={{ width: `${percentage}%` }}

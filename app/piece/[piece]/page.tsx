@@ -103,14 +103,17 @@ function ImageDetails({
 function ImageText({ imageData }: { imageData: ImageData }) {
   return (
     <div
-      className={`relative flex flex-col pb-20 desktop:pb-0 desktop:pr-[50px]`}
+      className={twMerge(
+        `relative flex flex-col pb-6 desktop:pb-0 desktop:pr-[50px]`,
+        `min-h-[530px] tablet:min-h-[400px]`
+      )}
     >
       <span
         className={`absolute right-0 textStyle-display text-lightgray tablet:left-0 desktop:left-auto desktop:right-0`}
       >
         {imageData.year}
       </span>
-      <span
+      <div
         className={twMerge(
           `w-full textStyle-body text-darkgray z-10 mt-[75px]`,
           `tablet:w-[70%] tablet:self-center`,
@@ -118,8 +121,8 @@ function ImageText({ imageData }: { imageData: ImageData }) {
         )}
       >
         {imageData.description}
-      </span>
-      <div className={`h-10 desktop:h-0 desktop:grow`} />
+      </div>
+      <div className={`h-6 desktop:h-0 desktop:grow`} />
       <Link
         className={twMerge(
           `textStyle-link2 text-darkgray uppercase underline hover:text-black transition-colors`,
