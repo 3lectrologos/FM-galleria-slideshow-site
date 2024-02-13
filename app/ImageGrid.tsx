@@ -60,10 +60,7 @@ function ImageCard({
   path: string
 }) {
   return (
-    <motion.div
-      initial={{ height: 0, opacity: 0 }}
-      animate={{ height: 'auto', opacity: 1 }}
-    >
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
       <Link
         className={`relative w-fit h-fit group cursor-pointer`}
         role="button"
