@@ -4,6 +4,7 @@ import { ImageData } from '@/app/types'
 import Link from 'next/link'
 import { twMerge } from 'tailwind-merge'
 import { ReactNode } from 'react'
+import { motion } from 'framer-motion'
 
 export default function Footer({
   index,
@@ -51,7 +52,9 @@ function FooterProgressBar({ index, total }: { index: number; total: number }) {
   return (
     <div className={`relative flex flex-row w-full`}>
       <div className={`w-full h-px bg-gray`} />
-      <div
+      <motion.div
+        layout
+        layoutId="progress-bar"
         className={`absolute top-0 h-px bg-black`}
         style={{ width: `${percentage}%` }}
       />
