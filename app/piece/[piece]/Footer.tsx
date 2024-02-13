@@ -97,6 +97,7 @@ function FooterButton({
   return (
     <Link
       href={url}
+      scroll={false}
       className={twMerge(
         `p-2 group`,
         url || `pointer-events-none cursor-default`
