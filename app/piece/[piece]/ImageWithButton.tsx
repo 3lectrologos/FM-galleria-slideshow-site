@@ -70,63 +70,25 @@ function TheaterImage({
   imageData: ImageData
   onClose: () => void
 }) {
-  const imgWidth = imageData.sizes.gallery.width
-  const imgHeight = imageData.sizes.gallery.height
-  const defaultTopOffset = -48
-  const [buttonOffset, setButtonOffset] = useState({
-    top: 0,
-    right: 0,
-  })
-
-  useEffect(() => {
-    function computeButtonOffset() {
-      const img: HTMLImageElement | null = document.getElementById(
-        'theater-image'
-      ) as HTMLImageElement
-      if (img) {
-        const { width: widthString, height: heightString } =
-          window.getComputedStyle(img)
-        const divWidth = parseInt(widthString)
-        const divHeight = parseInt(heightString)
-
-        if (divWidth > imgWidth && divHeight > imgHeight) {
-          const extraWidth = divWidth - imgWidth
-          const extraHeight = divHeight - imgHeight
-          setButtonOffset({
-            top: extraHeight / 2,
-            right: extraWidth / 2,
-          })
-        } else {
-          const imgAspectRatio = imgWidth / imgHeight
-          const divAspectRatio = divWidth / divHeight
-          if (!imgAspectRatio || !divAspectRatio) return
-          if (divAspectRatio > imgAspectRatio) {
-            const actualImageWidth = divHeight * imgAspectRatio
-            const extraWidth = divWidth - actualImageWidth
-            setButtonOffset({ top: 0, right: extraWidth / 2 })
-          } else if (divAspectRatio < imgAspectRatio) {
-            const actualImageHeight = divWidth / imgAspectRatio
-            const extraHeight = divHeight - actualImageHeight
-            setButtonOffset({
-              top: extraHeight / 2,
-              right: 0,
-            })
-          }
-        }
-      }
-    }
-
-    computeButtonOffset()
-    window.addEventListener('resize', computeButtonOffset)
-    return () => window.removeEventListener('resize', computeButtonOffset)
-  }, [imgWidth, imgHeight])
-
   useLayoutEffect(() => {
     document.body.style.overflow = 'hidden'
     return () => {
       document.body.style.overflow = 'auto'
     }
   }, [])
+
+  useEffect(() => {
+    function onClick(event: MouseEvent) {
+      if (event.target !== document.getElementById('theater-image')) {
+        onClose()
+      }
+    }
+
+    document.addEventListener('click', onClick)
+    return () => {
+      document.removeEventListener('click', onClick)
+    }
+  }, [onClose])
 
   return (
     <motion.div
@@ -135,28 +97,27 @@ function TheaterImage({
       id="theater-image-container"
       className={`fixed top-0 left-0 w-full h-full z-20 flex flex-col justify-center items-center p-6 pt-14 tablet:p-12 tablet:pt-16 bg-black/85`}
     >
-      <div className={`relative w-full h-full flex flex-col`}>
-        <button
-          className={`absolute z-50 textStyle-theater uppercase text-white text-right hover:opacity-25 transition-opacity py-2`}
-          style={{
-            right: buttonOffset.right,
-            top: defaultTopOffset + buttonOffset.top,
-          }}
-          onClick={onClose}
-        >
-          close
-        </button>
-        <div
-          className={`relative flex-grow w-full h-full flex flex-col gap-10`}
-        >
-          <Image
+      <div
+        className={`relative w-full h-full flex flex-col items-center justify-center`}
+      >
+        <div className={`relative`}>
+          <img
             id="theater-image"
             className={`object-scale-down`}
             src={imageData.images.gallery.slice(1)}
             alt={imageData.name}
-            fill={true}
-            priority={true}
           />
+          <button
+            className={twMerge(
+              `absolute top-0 right-0 z-50 -translate-y-full py-4`,
+              `textStyle-theater uppercase text-white text-right`,
+              `hover:opacity-25 transition-opacity`,
+              `tablet:-top-4`
+            )}
+            onClick={onClose}
+          >
+            close
+          </button>
         </div>
       </div>
     </motion.div>

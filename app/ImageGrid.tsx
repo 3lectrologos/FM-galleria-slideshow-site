@@ -60,9 +60,13 @@ function ImageCard({
   path: string
 }) {
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+    <motion.div
+      className={`relative`}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+    >
       <Link
-        className={`relative w-fit h-fit group cursor-pointer`}
+        className={`w-fit h-fit group cursor-pointer`}
         role="button"
         aria-label={name}
         tabIndex={0}
@@ -73,7 +77,7 @@ function ImageCard({
           className={`absolute top-0 w-full h-full bg-white/50 opacity-0 group-hover:opacity-100 transition-opacity`}
         />
         <div
-          className={`absolute flex flex-col justify-end bottom-0 w-full h-[170px] bg-gradient-to-b from-black/0 to-black/[84%]`}
+          className={`absolute flex flex-col justify-end left-0 bottom-0 w-full h-[170px] bg-gradient-to-b from-black/0 to-black/[84%]`}
         >
           <div className={`flex flex-col gap-y-2 ml-8 mr-12 mb-8`}>
             <span className={`textStyle-h2 text-white`}>{name}</span>

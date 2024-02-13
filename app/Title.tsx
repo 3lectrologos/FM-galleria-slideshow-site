@@ -9,7 +9,7 @@ export default function Title({ className = '' }: { className?: string }) {
         className={`flex flex-row justify-between items-center px-6 tablet:px-10 desktop:px-0`}
       >
         <Link
-          className={`h-8 desktop:h-12 flex flex-col flex-grow items-start cursor-pointer`}
+          className={`h-8 desktop:h-12 w-[113px] desktop:w-[170px] flex flex-col items-start cursor-pointer`}
           href="/"
         >
           <svg viewBox={`0 0 170 48`} xmlns="http://www.w3.org/2000/svg">
