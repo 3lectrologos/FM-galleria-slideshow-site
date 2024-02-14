@@ -110,8 +110,15 @@ function TheaterImage({
             onClick={onClose}
           >
             <div
-              className={`w-7 h-7 bg-black rounded-full fill-white/80 hover:bg-white/25 hover:fill-white transition-colors`}
+              className={`relative w-7 h-7 rounded-full fill-white transition-colors group`}
             >
+              <div
+                className={`absolute rounded-full top-0 right-0 w-full h-full translate-x-0 fill-black/75 -z-20 group-hover:fill-white/25 transition-colors backdrop-blur`}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                  <circle cx="256" cy="256" r="250" strokeWidth="0" />
+                </svg>
+              </div>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                 <path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c-9.4 9.4-9.4 24.6 0 33.9l47 47-47 47c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l47-47 47 47c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-47-47 47-47c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-47 47-47-47c-9.4-9.4-24.6-9.4-33.9 0z" />
               </svg>
