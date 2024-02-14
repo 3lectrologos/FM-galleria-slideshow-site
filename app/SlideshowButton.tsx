@@ -11,7 +11,7 @@ export default function SlideshowButton({
 }: {
   className?: string
 }) {
-  const firstPieceUrl = `/piece/${getOrderedImages()[0].name}`
+  const firstPieceUrl = encodeURI(`/piece/${getOrderedImages()[0].name}`)
   const pathname = usePathname()
   const [buttonText, setButtonText] = useState('start slideshow')
   const [buttonUrl, setButtonUrl] = useState(firstPieceUrl)
