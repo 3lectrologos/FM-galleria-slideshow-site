@@ -98,27 +98,32 @@ function TheaterImage({
       className={`fixed top-0 left-0 w-full h-full z-20 flex flex-col justify-center items-center p-6 tablet:p-12 bg-black/85`}
     >
       <div
-        className={`relative w-full h-full flex flex-col gap-y-2 items-center justify-center`}
+        className={`w-full h-full flex flex-col items-center justify-center`}
       >
-        <button
-          className={twMerge(
-            `w-6 h-6 stroke-lightgray fill-lightgray self-end`,
-            `textStyle-theater uppercase text-white text-right`,
-            `hover:opacity-25 transition-opacity`,
-            `tablet:-top-4`
-          )}
-          onClick={onClose}
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-            <path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c-9.4 9.4-9.4 24.6 0 33.9l47 47-47 47c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l47-47 47 47c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-47-47 47-47c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-47 47-47-47c-9.4-9.4-24.6-9.4-33.9 0z" />
-          </svg>
-        </button>
-        <img
-          id="theater-image"
-          className={`h-full object-scale-down`}
-          src={imageData.images.gallery.slice(1)}
-          alt={imageData.name}
-        />
+        <div className={`relative max-h-full`}>
+          <button
+            className={twMerge(
+              `absolute top-0 right-0 p-1.5 translate-x-1/2 -translate-y-1/2 self-end`,
+              `textStyle-theater uppercase text-white text-right`,
+              `hover:fill-lightgray/50 transition-opacity`
+            )}
+            onClick={onClose}
+          >
+            <div
+              className={`w-7 h-7 bg-black rounded-full fill-white/80 hover:bg-white/25 hover:fill-white transition-colors`}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                <path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c-9.4 9.4-9.4 24.6 0 33.9l47 47-47 47c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l47-47 47 47c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-47-47 47-47c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-47 47-47-47c-9.4-9.4-24.6-9.4-33.9 0z" />
+              </svg>
+            </div>
+          </button>
+          <img
+            id="theater-image"
+            className={`max-h-full object-scale-down`}
+            src={imageData.images.gallery.slice(1)}
+            alt={imageData.name}
+          />
+        </div>
       </div>
     </motion.div>
   )
