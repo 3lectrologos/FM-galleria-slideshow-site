@@ -70,7 +70,7 @@ function ImageCard({
         role="button"
         aria-label={name}
         tabIndex={0}
-        href={`/piece/${name}`}
+        href={encodeURI(`/piece/${name}`)}
       >
         <img className={`object-contain`} src={path} alt={name} />
         <div

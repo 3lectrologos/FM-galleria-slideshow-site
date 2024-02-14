@@ -3,6 +3,9 @@ import seedrandom from 'seedrandom'
 import { AllowedColumns } from '@/app/types'
 import { ImageData } from '@/app/types'
 
+/*
+This uses a greedy approximation algorithm (see https://en.wikipedia.org/wiki/Longest-processing-time-first_scheduling).
+ */
 export function masonry(
   numColumns: AllowedColumns,
   seed: string = 'foobar42'

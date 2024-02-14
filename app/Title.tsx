@@ -4,13 +4,14 @@ import SlideshowButton from '@/app/SlideshowButton'
 
 export default function Title({ className = '' }: { className?: string }) {
   return (
-    <div className={twMerge(`w-full flex flex-col`, className)}>
+    <header className={twMerge(`w-full flex flex-col`, className)}>
       <div
         className={`flex flex-row justify-between items-center px-6 tablet:px-10 desktop:px-0`}
       >
         <Link
           className={`h-8 desktop:h-12 w-[113px] desktop:w-[170px] flex flex-col items-start cursor-pointer`}
           href="/"
+          aria-label="home"
         >
           <svg viewBox={`0 0 170 48`} xmlns="http://www.w3.org/2000/svg">
             <path
@@ -23,7 +24,7 @@ export default function Title({ className = '' }: { className?: string }) {
         <SlideshowButton />
       </div>
       <Divider />
-    </div>
+    </header>
   )
 }
 
