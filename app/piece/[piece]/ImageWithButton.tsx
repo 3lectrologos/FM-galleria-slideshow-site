@@ -95,30 +95,30 @@ function TheaterImage({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       id="theater-image-container"
-      className={`fixed top-0 left-0 w-full h-full z-20 flex flex-col justify-center items-center p-6 pt-14 tablet:p-12 tablet:pt-16 bg-black/85`}
+      className={`fixed top-0 left-0 w-full h-full z-20 flex flex-col justify-center items-center p-6 tablet:p-12 bg-black/85`}
     >
       <div
-        className={`relative w-full h-full flex flex-col items-center justify-center`}
+        className={`relative w-full h-full flex flex-col gap-y-2 items-center justify-center`}
       >
-        <div className={`relative`}>
-          <img
-            id="theater-image"
-            className={`object-scale-down`}
-            src={imageData.images.gallery.slice(1)}
-            alt={imageData.name}
-          />
-          <button
-            className={twMerge(
-              `absolute top-0 right-0 z-50 -translate-y-full py-4`,
-              `textStyle-theater uppercase text-white text-right`,
-              `hover:opacity-25 transition-opacity`,
-              `tablet:-top-4`
-            )}
-            onClick={onClose}
-          >
-            close
-          </button>
-        </div>
+        <button
+          className={twMerge(
+            `w-6 h-6 stroke-lightgray fill-lightgray self-end`,
+            `textStyle-theater uppercase text-white text-right`,
+            `hover:opacity-25 transition-opacity`,
+            `tablet:-top-4`
+          )}
+          onClick={onClose}
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            <path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c-9.4 9.4-9.4 24.6 0 33.9l47 47-47 47c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l47-47 47 47c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-47-47 47-47c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-47 47-47-47c-9.4-9.4-24.6-9.4-33.9 0z" />
+          </svg>
+        </button>
+        <img
+          id="theater-image"
+          className={`h-full object-scale-down`}
+          src={imageData.images.gallery.slice(1)}
+          alt={imageData.name}
+        />
       </div>
     </motion.div>
   )
