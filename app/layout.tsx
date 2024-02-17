@@ -26,7 +26,7 @@ export default function RootLayout({
         >
           <div className={`w-full flex-grow flex flex-col items-center`}>
             <Title className={`w-full px-0 desktop:px-10`} />
-            <main>{children}</main>
+            {children}
           </div>
         </div>
       </body>
